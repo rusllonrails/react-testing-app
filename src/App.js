@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Counter from './components/Counter';
-
+import DynamicInput from './components/DynamicInput';
 
 function App() {
   const [value, setValue] = useState('some text')
@@ -8,12 +8,7 @@ function App() {
   return (
     <div className="App">
       <Counter />
-      <h2>{value}</h2>
-      <input
-        type='text'
-        value={value}
-        onChange={event => setValue(event.target.value)}
-        />
+      <DynamicInput />
     </div>
   );
 }
