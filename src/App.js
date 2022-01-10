@@ -12,8 +12,7 @@ function App() {
     {id: 3, name: 'SQL', desc: 'Some text 3'}
   ])
 
-  const [title, setTitle] = useState()
-  const [body, setBody] = useState()
+  const [post, setPost] = useState({id: '', name: '', desc: ''})
   const bodyInputRef = useRef()
 
   const addNewPost = (e) => {
@@ -21,8 +20,8 @@ function App() {
 
     const newPost = {
       id: Date.now,
-      name: title,
-      desc: body
+      name: post.name,
+      desc: post.desc
     }
 
     setPosts([...posts, newPost])
@@ -40,13 +39,13 @@ function App() {
         <MyInput
           type='text'
           placeholder='new post title'
-          onChange={(e) => setTitle(e.target.value)}
-          value={title} />
+          onChange={(e) => setPost({...post, name: e.target.value})}
+          value={post.name} />
         <MyInput
           type='text'
           placeholder='new post desc'
-          onChange={(e) => setBody(e.target.value)}
-          value={body} />
+          onChange={(e) => setPost({...post, desc: e.target.value})}
+          value={post.desc} />
         <MyButton onClick={addNewPost}>Add Post</MyButton>
 
         <PostList posts={posts} title='List of Programming Languages' />
