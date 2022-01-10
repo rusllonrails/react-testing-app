@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import Counter from './components/Counter';
-import DynamicInput from './components/DynamicInput';
 import PostList from './components/PostList';
+import MyButton from './components/UI/button/MyButton'
+import MyInput from './components/UI/input/MyInput'
 import './styles/App.css';
 
 function App() {
@@ -11,13 +11,25 @@ function App() {
     {id: 3, name: 'SQL', desc: 'Some text 3'}
   ])
 
+  const [title, setTitle] = useState()
+
+  const addNewPost = (e) => {
+    e.preventDefault()
+    console.log(title)
+  }
+
   return (
     <div className="App">
-      <Counter />
-      <DynamicInput />
-
-      <PostList posts={posts} title='List of Programming Languages' />
-      <PostList posts={posts} title='List of Programming Languages 2' />
+      <form>
+        <MyInput
+          type='text'
+          placeholder='new post'
+          onChange={(e) => setTitle(e.target.value)}
+          value={title} />
+        <MyButton onClick={addNewPost}>Add Post</MyButton>
+        <PostList posts={posts} title='List of Programming Languages' />
+        <PostList posts={posts} title='List of Programming Languages 2' />
+      </form>
     </div>
   );
 }
