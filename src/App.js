@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import PostList from './components/PostList';
 import MyButton from './components/UI/button/MyButton'
 import MyInput from './components/UI/input/MyInput'
+import InputWithUseRef from './components/UI/input/InputWithUseRef'
 import './styles/App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   ])
 
   const [title, setTitle] = useState()
+  const bodyInputRef = useRef()
 
   const addNewPost = (e) => {
     e.preventDefault()
@@ -21,6 +23,11 @@ function App() {
   return (
     <div className="App">
       <form>
+        <InputWithUseRef
+          ref={bodyInputRef}
+          type='text'
+          placeholder='new post'
+          onChange={(e) => console.log(bodyInputRef.current.value)} />
         <MyInput
           type='text'
           placeholder='new post'
