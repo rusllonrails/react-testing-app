@@ -13,11 +13,19 @@ function App() {
   ])
 
   const [title, setTitle] = useState()
+  const [body, setBody] = useState()
   const bodyInputRef = useRef()
 
   const addNewPost = (e) => {
     e.preventDefault()
-    console.log(title)
+
+    const newPost = {
+      id: Date.now,
+      name: title,
+      desc: body
+    }
+
+    setPosts([...posts, newPost])
   }
 
   return (
@@ -26,16 +34,22 @@ function App() {
         <InputWithUseRef
           ref={bodyInputRef}
           type='text'
-          placeholder='new post'
+          placeholder='new post (useRef)'
           onChange={(e) => console.log(bodyInputRef.current.value)} />
+
         <MyInput
           type='text'
-          placeholder='new post'
+          placeholder='new post title'
           onChange={(e) => setTitle(e.target.value)}
           value={title} />
+        <MyInput
+          type='text'
+          placeholder='new post desc'
+          onChange={(e) => setBody(e.target.value)}
+          value={body} />
         <MyButton onClick={addNewPost}>Add Post</MyButton>
+
         <PostList posts={posts} title='List of Programming Languages' />
-        <PostList posts={posts} title='List of Programming Languages 2' />
       </form>
     </div>
   );
