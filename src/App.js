@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Counter from './components/Counter';
 import DynamicInput from './components/DynamicInput';
-import PostItem from './components/PostItem';
+import PostList from './components/PostList';
 import './styles/App.css';
 
 function App() {
@@ -16,10 +16,8 @@ function App() {
       <Counter />
       <DynamicInput />
 
-      <h1>List</h1>
-      {posts.map((post) =>
-        <PostItem post={post} key={post.id} />
-      )}
+      <PostList posts={posts} title='List of Programming Languages' />
+      <PostList posts={posts} title='List of Programming Languages 2' />
     </div>
   );
 }
