@@ -17,14 +17,8 @@ function App() {
 
   const addNewPost = (e) => {
     e.preventDefault()
-
-    const newPost = {
-      id: Date.now,
-      name: post.name,
-      desc: post.desc
-    }
-
-    setPosts([...posts, newPost])
+    setPosts([...posts, {id: Date.now, name: post.name, desc: post.desc}])
+    setPost({name: '', desc: ''})
   }
 
   return (
