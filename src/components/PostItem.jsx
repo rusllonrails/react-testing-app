@@ -9,8 +9,8 @@ function PostItem(props) {
 
   return (
     <div className="post">
-      <strong>{props.name}</strong>
-      <span>{props.desc}</span>
+      <strong>{props.post.name}</strong>
+      <span>{props.post.desc}</span >
       <button onClick={removeItem}>Remove</button>
     </div>
   );

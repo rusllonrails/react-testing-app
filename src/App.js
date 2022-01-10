@@ -5,15 +5,21 @@ import PostItem from './components/PostItem';
 import './styles/App.css';
 
 function App() {
-  const [value, setValue] = useState('some text')
+  const [posts, setPosts] = useState([
+    {id: 1, name: 'Javascript', desc: 'Some text 1'},
+    {id: 2, name: 'Ruby', desc: 'Some text 2'},
+    {id: 3, name: 'SQL', desc: 'Some text 3'}
+  ])
 
   return (
     <div className="App">
       <Counter />
       <DynamicInput />
-      <PostItem name='Javascript' desc='Test 1' />
-      <PostItem name='Ruby' desc='Test 2' />
-      <PostItem name='TypeScript' desc='Test 3' />
+
+      <h1>List</h1>
+      {posts.map((post) =>
+        <PostItem post={post} key={post.id} />
+      )}
     </div>
   );
 }
