@@ -45,7 +45,7 @@ function App() {
     console.log('filtered')
 
     if (searchQuery) {
-      return sortedPosts.filter(p => p.name.includes(searchQuery))
+      return sortedPosts.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
     }
 
     return sortedPosts
