@@ -31,8 +31,6 @@ function App() {
   }
 
   const sortedPosts = useMemo(() => {
-    console.log('sort')
-
     if (selectedSort) {
       return [...posts].sort((a,b) => a[selectedSort].localeCompare(b[selectedSort]))
     }
@@ -42,8 +40,6 @@ function App() {
 
 
   const filteredPosts = useMemo(() => {
-    console.log('filtered')
-
     if (searchQuery) {
       return sortedPosts.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
     }
