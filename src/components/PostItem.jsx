@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 function PostItem(props) {
 
   function removeItem() {
