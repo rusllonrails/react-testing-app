@@ -31,7 +31,7 @@ function App() {
   }
 
   const sortedPosts = useMemo(() => {
-    console.log('cool')
+    console.log('sort')
 
     if (selectedSort) {
       return [...posts].sort((a,b) => a[selectedSort].localeCompare(b[selectedSort]))
@@ -39,6 +39,17 @@ function App() {
 
     return posts
   }, [posts, selectedSort])
+
+
+  const filteredPosts = useMemo(() => {
+    console.log('filtered')
+
+    if (searchQuery) {
+      return sortedPosts.filter(p => p.name.includes(searchQuery))
+    }
+
+    return sortedPosts
+  }, [searchQuery])
 
   return (
     <div className="App">
@@ -61,7 +72,7 @@ function App() {
       <PostForm create={createPost} />
 
       {posts.length > 0
-        ? <PostList posts={sortedPosts} remove={removePost} title='List of Programming Languages' />
+        ? <PostList posts={filteredPosts} remove={removePost} title='List of Programming Languages' />
         : <h1>No posts</h1>
       }
     </div>
