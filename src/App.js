@@ -1,7 +1,8 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useMemo} from 'react';
 import PostList from './components/PostList';
 import InputWithUseRef from './components/UI/input/InputWithUseRef'
 import MySelect from './components/UI/select/MySelect'
+import MyInput from './components/UI/input/MyInput'
 import PostForm from './components/PostForm'
 import './styles/App.css';
 
@@ -13,6 +14,7 @@ function App() {
   ])
 
   const [selectedSort, setSelectedSort] = useState('name')
+  const [searchQuery, setSearchQuery] = useState('')
 
   {/* const bodyInputRef = useRef() */}
 
@@ -26,14 +28,27 @@ function App() {
 
   const sortBy = (sort) => {
     setSelectedSort(sort)
-    const sorted = [...posts].sort((a,b) => a[sort].localeCompare(b[sort]))
-    setPosts(sorted)
   }
+
+  const sortedPosts = useMemo(() => {
+    console.log('cool')
+
+    if (selectedSort) {
+      return [...posts].sort((a,b) => a[selectedSort].localeCompare(b[selectedSort]))
+    }
+
+    return posts
+  }, [posts, selectedSort])
 
   return (
     <div className="App">
       {/* <InputWithUseRef ref={bodyInputRef} type='text'placeholder='new post (useRef)' onChange={(e) => console.log(bodyInputRef.current.value)} /> */}
 
+      <MyInput
+        type='text'
+        placeholder='search by keywords'
+        onChange={(e) => setSearchQuery(e.target.value)}
+        value={searchQuery} />
       <MySelect
         value={selectedSort}
         onChange={sortBy}
@@ -46,7 +61,7 @@ function App() {
       <PostForm create={createPost} />
 
       {posts.length > 0
-        ? <PostList posts={posts} remove={removePost} title='List of Programming Languages' />
+        ? <PostList posts={sortedPosts} remove={removePost} title='List of Programming Languages' />
         : <h1>No posts</h1>
       }
     </div>
