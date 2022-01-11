@@ -1,16 +1,12 @@
 import React, {useState} from 'react';
+import MyButton from './UI/button/MyButton';
 
 function PostItem(props) {
-
-  function removeItem() {
-    console.log('removed')
-  }
-
   return (
     <div className="post">
       <strong>{props.post.name}</strong>
       <span>{props.post.desc}</span >
-      <button onClick={removeItem}>Remove</button>
+      <MyButton onClick={() => props.remove(props.post)}>Remove</MyButton>
     </div>
   );
 }

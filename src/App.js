@@ -17,12 +17,19 @@ function App() {
     setPosts([...posts, newPost])
   }
 
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !== post.id))
+  }
+
   return (
     <div className="App">
       {/* <InputWithUseRef ref={bodyInputRef} type='text'placeholder='new post (useRef)' onChange={(e) => console.log(bodyInputRef.current.value)} /> */}
-
       <PostForm create={createPost} />
-      <PostList posts={posts} title='List of Programming Languages' />
+
+      {posts.length > 0
+        ? <PostList posts={posts} remove={removePost} title='List of Programming Languages' />
+        : <h1>No posts</h1>
+      }
     </div>
   );
 }
