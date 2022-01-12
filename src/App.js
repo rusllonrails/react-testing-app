@@ -1,9 +1,8 @@
 import React, {useState, useRef, useMemo} from 'react';
 import PostList from './components/PostList';
 import InputWithUseRef from './components/UI/input/InputWithUseRef'
-import MySelect from './components/UI/select/MySelect'
-import MyInput from './components/UI/input/MyInput'
 import PostForm from './components/PostForm'
+import PostFilters from './components/PostFilters'
 import './styles/App.css';
 
 function App() {
@@ -13,10 +12,7 @@ function App() {
     {id: 3, name: 'Rango', desc: 'Absolute'}
   ])
 
-  const [selectedSort, setSelectedSort] = useState('name')
-  const [searchQuery, setSearchQuery] = useState('')
-
-  {/* const bodyInputRef = useRef() */}
+  const [filters, setFilters] = useState({sort: '', query: ''})
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -27,44 +23,29 @@ function App() {
   }
 
   const sortBy = (sort) => {
-    setSelectedSort(sort)
+    setFilters({sort: sort})
   }
 
   const sortedPosts = useMemo(() => {
-    if (selectedSort) {
-      return [...posts].sort((a,b) => a[selectedSort].localeCompare(b[selectedSort]))
+    if (filters.sort) {
+      return [...posts].sort((a,b) => a[filters.sort].localeCompare(b[filters.sort]))
     }
 
     return posts
-  }, [posts, selectedSort])
+  }, [posts, filters.sort])
 
 
   const filteredPosts = useMemo(() => {
-    if (searchQuery) {
-      return sortedPosts.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    if (filters.query) {
+      return sortedPosts.filter(p => p.name.toLowerCase().includes(filters.query.toLowerCase()))
     }
 
     return sortedPosts
-  }, [searchQuery, sortedPosts])
+  }, [filters.query, sortedPosts])
 
   return (
     <div className="App">
-      {/* <InputWithUseRef ref={bodyInputRef} type='text'placeholder='new post (useRef)' onChange={(e) => console.log(bodyInputRef.current.value)} /> */}
-
-      <MyInput
-        type='text'
-        placeholder='search by keywords'
-        onChange={(e) => setSearchQuery(e.target.value)}
-        value={searchQuery} />
-      <MySelect
-        value={selectedSort}
-        onChange={sortBy}
-        options={[
-          {value: 'name', name: 'by name'},
-          {value: 'desc', name: 'by body'}
-        ]}
-        defaultValue={'name'}
-       />
+      <PostFilters filters={filters} setFilters={setFilters} />
       <PostForm create={createPost} />
 
       {filteredPosts.length > 0
