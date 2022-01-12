@@ -47,11 +47,7 @@ function App() {
     <div className="App">
       <PostFilters filters={filters} setFilters={setFilters} />
       <PostForm create={createPost} />
-
-      {filteredPosts.length > 0
-        ? <PostList posts={filteredPosts} remove={removePost} title='List of Programming Languages' />
-        : <h1>No posts</h1>
-      }
+      <PostList posts={filteredPosts} remove={removePost} title='List of Programming Languages' />
     </div>
   );
 }

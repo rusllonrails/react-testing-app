@@ -6,8 +6,6 @@ function PostFilters({filters, setFilters}) {
   return (
     <div>
       <form>
-        {console.log('PostFilters: query' + filters.query + ', sort: ' + filters.sort)}
-
         <MyInput
           type='text'
           placeholder='search by keywords'
