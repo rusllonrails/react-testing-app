@@ -6,15 +6,17 @@ function PostFilters({filters, setFilters}) {
   return (
     <div>
       <form>
+        {console.log('PostFilters: query' + filters.query + ', sort: ' + filters.sort)}
+
         <MyInput
           type='text'
           placeholder='search by keywords'
-          onChange={(e) => setFilters({query: e.target.value})}
+          onChange={(e) => setFilters({...filters, query: e.target.value})}
           value={filters.query} />
 
         <MySelect
           value={filters.sort}
-          onChange={selectedSortValue => setFilters({sort: selectedSortValue})}
+          onChange={selectedSortValue => setFilters({...filters, sort: selectedSortValue})}
           options={[
             {value: 'name', name: 'by name'},
             {value: 'desc', name: 'by body'}

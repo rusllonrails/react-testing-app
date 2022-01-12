@@ -23,7 +23,7 @@ function App() {
   }
 
   const sortBy = (sort) => {
-    setFilters({sort: sort})
+    setFilters({...filters, sort: sort})
   }
 
   const sortedPosts = useMemo(() => {
@@ -41,7 +41,7 @@ function App() {
     }
 
     return sortedPosts
-  }, [filters.query, sortedPosts])
+  }, [sortedPosts, filters.query])
 
   return (
     <div className="App">
