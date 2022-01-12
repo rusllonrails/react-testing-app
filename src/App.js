@@ -45,7 +45,7 @@ function App() {
     }
 
     return sortedPosts
-  }, [searchQuery])
+  }, [searchQuery, sortedPosts])
 
   return (
     <div className="App">
@@ -67,7 +67,7 @@ function App() {
        />
       <PostForm create={createPost} />
 
-      {posts.length > 0
+      {filteredPosts.length > 0
         ? <PostList posts={filteredPosts} remove={removePost} title='List of Programming Languages' />
         : <h1>No posts</h1>
       }
